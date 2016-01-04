@@ -1,14 +1,24 @@
 #!/usr/bin/perl
 
 my @known_primes=(2,3,5,7,11,13);
-my %known_primes_hash = map { $_ => 1 } @known_primes;
 my $max_known_prime = 13;
 my $n = 13;
 
+# Slower
+sub add_if_prime() {
+    foreach my $prime (@known_primes) {
+        if ($n % $prime == 0) {
+            return;
+        }
+    }
+    push @known_primes, $n;
+    $max_known_prime = $n;
+}
+
+# Faster
 sub add_if_prime2() {
     if (is_prime($n)) {
         push @known_primes, $n;
-        $known_primes_hash{$n} = 1;
         $max_known_prime = $n;
     }
 }
