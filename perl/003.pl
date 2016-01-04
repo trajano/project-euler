@@ -11,6 +11,10 @@ sub prime_factors($) {
             $n /= $d;
         }
         ++$d;
+        if ($d * $d > $n) {
+           push @factors, $n if $n > 1;
+           last;
+        }
     }
     return @factors;
 }
