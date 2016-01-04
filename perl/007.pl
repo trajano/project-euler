@@ -7,7 +7,6 @@ my $n = 13;
 
 sub add_if_prime2() {
     if (is_prime($n)) {
-        print "$n is prime\n";
         push @known_primes, $n;
         $known_primes_hash{$n} = 1;
         $max_known_prime = $n;
@@ -16,11 +15,7 @@ sub add_if_prime2() {
 
 sub is_prime($) {
     my $x = shift;
-    if ($x <= 1) {
-        return 0;
-    } elsif ($x <= 3) {
-        return 1;
-    } elsif (($x % 2) == 0 or ($x % 3) == 0 or ($x % 5) == 0) {
+    if (($x % 2) == 0 or ($x % 3) == 0) {
         return 0;
     }
     my $i = 5;
