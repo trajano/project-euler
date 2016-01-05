@@ -1,14 +1,12 @@
-#!/usr/bin/perl
-
+#!/usr/bin/perl -wT 
+use strict;
 my @known_primes=(2,3,5,7,11,13);
 my %known_prime_hash = map { $_ => 1 } @known_primes;
 my $max_known_prime = 13;
 my $n = 13;
 
-# Faster
 sub add_if_prime2() {
     if (is_prime($n)) {
-        push @known_primes, $n;
         $known_prime_hash{$n} = 1;
         $max_known_prime = $n;
     }
@@ -28,12 +26,6 @@ sub is_prime($) {
     return 1;
 }
 
-while ($max_known_prime < 1000000) {
-    $n += 2;
-    
-    add_if_prime2();
-}
-
 sub get_rotations($) {
     my $v = shift;
     my @ret = ($v);
@@ -50,7 +42,7 @@ sub has_all_rotations($) {
     my $has_all_rotations = 1;
     my @rotations = get_rotations($prime);
     foreach (@rotations) {
-        $has_all_rotations &&= $known_prime_hash{$_} == 1;
+        $has_all_rotations &&= $known_prime_hash{$_};
         return 0 unless $has_all_rotations;
     }
     foreach (@rotations) {
@@ -60,7 +52,13 @@ sub has_all_rotations($) {
     
 }
 
-foreach (@known_primes) {
+while ($max_known_prime < 1000000) {
+    $n += 2;
+    
+    add_if_prime2();
+}
+
+foreach (keys %known_prime_hash) {
     has_all_rotations($_);
 }
 
