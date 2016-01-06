@@ -1,4 +1,8 @@
 public class E045 {
+    /**
+     * @deprecated hexagonal numbers are also triangular numbers so there's no need for this method.
+     */
+    @Deprecated
 	public static long t(long n) {
 		return (n * (n + 1)) / 2;
 	}
@@ -12,16 +16,13 @@ public class E045 {
 	}
 
     public static void main(final String[] argv) {
-    	long tn = 285L + 1;
-    	long pn = 165L;
+    	
+    	long pn = 165L + 1;
     	long hn = 143L;
 
-    	while (t(tn) != p(pn) || p(pn) != h(hn)) {
+    	while (p(pn) != h(hn)) {
         
-    		if (t(tn) < p(pn)) {
-    			++tn;
-    			continue;
-    		} else if (p(pn) < h(hn)) {
+    		if (p(pn) < h(hn)) {
     			++pn;
     			continue;
     		} else {
@@ -29,6 +30,6 @@ public class E045 {
     		}
     	}
 
-        System.out.println(t(tn));
+        System.out.println(p(pn));
     }
 }
