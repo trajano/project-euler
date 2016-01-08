@@ -40,7 +40,7 @@ sub is_pandigital($) {
 # Note: Eight numbers cannot be done (1+2+3+4+5+6+7+8=36 => always dividable by 3)
 
 for (my $i = 7654321; $i >= 2143; $i -= 2) {
-	if (is_prime($i) && is_pandigital($i)) {
+	if (is_pandigital($i) && is_prime($i)) {
 		print $i;
 		last;
 	}
