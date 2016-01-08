@@ -5,23 +5,18 @@ use List::Util qw(sum);
 sub is_unusual($$) {
     my $x = shift;
     my $y = shift;
-    # This are the only possible sequence, sorter X or Y will not yield a anything larger than a 4 digit result, but we need 9 digits.
-    # XX x YYY = ZZZZ
-    # XXX x YYY = ZZZZ
-
-    #print substr($x, 0, 2) . " x " . substr($x, 2, 3) . "==" . substr($x, 5, 4) . "\n";
     return is_pandigital(($x * $y) . $x . $y, 9);
 
 }
 
-sub is_pandigital($$);
-sub is_pandigital($$) {
+sub is_pandigital($;$);
+sub is_pandigital($;$) {
     my $v = shift;
-    my $n = shift;
+    my $n = shift || length($v);
 
     return 1 if $n == 0 && length($v) == 0;
     return 0 unless $n == length($v);
-    $v =~ s/$n//;
+    $v =~ s/$n// || return 0;
     return is_pandigital($v, $n - 1);
     
 }
