@@ -15,7 +15,7 @@ public class E056 {
         int max = 0;
     	for (int a = 0; a < 100; ++a) {
             for (int b = 0; b < 100; ++b) {
-    		  BigInteger c = new BigInteger(String.valueOf(a)).pow(b);
+    		  BigInteger c = BigInteger.valueOf(a).pow(b);
               max = Math.max(max, digitalSum(c));
             }
     	}

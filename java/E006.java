@@ -6,7 +6,7 @@ public class E006 {
 
     	BigInteger c = BigInteger.ZERO;
     	for (int i = 1; i <= 100; ++i) {
-    		BigInteger a = new BigInteger(String.valueOf(i)).pow(2);
+    		BigInteger a = BigInteger.valueOf(i).pow(2);
     		c = c.add(a);
     	}
 
@@ -14,7 +14,7 @@ public class E006 {
         for (int i = 1; i <= 100; ++i) {
             d += i;
         }
-        BigInteger e = new BigInteger(String.valueOf(d)).pow(2);
+        BigInteger e = BigInteger.valueOf(d).pow(2);
 
         System.out.println(e.subtract(c));
     }
