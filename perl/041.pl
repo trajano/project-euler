@@ -19,8 +19,6 @@ sub is_pandigital($) {
     my $v = shift;
     my $n = length($v);
 
-    return 0 unless $v !~ /9/ || $v =~ /^[^9]*9[^9]*$/;
-    return 0 unless $v !~ /8/ || $v =~ /^[^8]*8[^8]*$/;
     return 0 unless $v !~ /7/ || $v =~ /^[^7]*7[^7]*$/;
     return 0 unless $v !~ /6/ || $v =~ /^[^6]*6[^6]*$/;
     return 0 unless $v !~ /5/ || $v =~ /^[^5]*5[^5]*$/;
@@ -28,28 +26,22 @@ sub is_pandigital($) {
     return 0 unless $v !~ /3/ || $v =~ /^[^3]*3[^3]*$/;
     return 0 unless $v !~ /2/ || $v =~ /^[^2]*2[^2]*$/;
     return 0 unless $v !~ /1/ || $v =~ /^[^1]*1[^1]*$/;
-    return 0 if $v =~ /0/;
+    return 0 if $v =~ /[089]/;
 
 	return 0 if $v =~ /5/ && $n < 5;
 	return 0 if $v =~ /6/ && $n < 6;
 	return 0 if $v =~ /7/ && $n < 7;
-	return 0 if $v =~ /8/ && $n < 8;
-	return 0 if $v =~ /9/ && $n < 9;
 
     return 1;
     
 }
 
-for (my $i = 2141; $i <= 987654321; $i += 2) {
+# Note: Nine numbers cannot be done (1+2+3+4+5+6+7+8+9=45 => always dividable by 3) 
+# Note: Eight numbers cannot be done (1+2+3+4+5+6+7+8=36 => always dividable by 3)
+
+for (my $i = 7654321; $i >= 2143; $i -= 2) {
 	if (is_prime($i) && is_pandigital($i)) {
-		print "$i\n";
+		print $i;
+		last;
 	}
 }
-#for (my $i = 987654321; $i >= 100000000; $i -= 2) {
-#	if (is_prime($i)) {
-#		print "$i\n";
-#	if (is_pandigital($i)) {
-#		last;	
-#	}
-#	}
-#}
