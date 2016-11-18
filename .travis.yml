@@ -1,0 +1,13 @@
+language: none
+sudo: false
+cache:
+  directories:
+  - "$HOME/.sonar/cache"
+addons:
+  sonarqube: true
+env:
+  global:
+  - secure: CPTuev9Nfgus+M6t5TGSAfubOEJVhvFDWu5dALjRGCJtFmI+Uhl3k9KNQXL0eUl74U85npbq1NmrtWodmuQm12j4RLmLw0WGlRYrHUZ8PbxIqSA3c6O6bUdKMJQbreKWKmGC9z5dEnl/jN1v0uZ9NX7KQ/SvS6F8RsOEN+TIyzqNCLRdgjFUDeODtq+IkbwVpoCNYPkukKrzOxlTGkUyUWI1xFoZHuRzLslnrYNEtCiTG69KYjmq/dh+CsPSULDrRfhK6rG4cR8697hw6YEp3svK7meL3ahXjQCrbE/vd4VgZVLBppGxxKbCQWEOjcGFUSYk3KU6R5i6J7eNSUljm/rAO0VGa9M0wZUX05NxdxCjvx7ORErxMPgPFzHtUpa3peZr/hNqFKO149Bwex2/z4xF2I+NLIoYSRVlNS4NI0QFVXS6Tw5wPxc+FxYE4mj+WUCiX/UYe3u+cUBGy5LsmOI89GHPPPJVWUoB/5NDOSNEv9Z8sTGWkbUKDgLetJow6eFdUXnKY2Pbz4BLBdkJkLMxLascE62talmh+GzDmnixwuSnEAonQL8VVxVi1o/P5RkzkMQ++F2twJLtjrPdEkp6eqINJr3/bUoaNZWu3j3azmDRPP1Mr+slOaY44LMKdapSvebI4Eeh8XKtgR+VQnPuUzr0dgibrGRyrd43jQw=
+script:
+- jdk_switcher use oraclejdk8
+- sonar-scanner -Dsonar.login=$SONAR_TOKEN
