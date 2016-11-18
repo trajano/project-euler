@@ -140,10 +140,7 @@ def min_sum_at_path(input_matrix, x, y, current_sum, path):
     if x < width - 1:
         sum_going_down = min_sum_at_path(input_matrix, x + 1, y, current_sum,
                                          path)
-    if sum_going_right > sum_going_down:
-        return sum_going_down
-    else:
-        return sum_going_right
+    return min(sum_going_right, sum_going_down)
 
 
 def two_way_minimal_path_sum(input_matrix, x, y):

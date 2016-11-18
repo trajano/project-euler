@@ -114,7 +114,7 @@ def to_2d(input, width):
     return to_2d_internal(input_tuple, width)
 
 
-current_min = 999999
+current_min = 380000
 
 
 def min_sum_at_path(input_matrix, x, y, current_sum, path):
@@ -143,12 +143,8 @@ def min_sum_at_path(input_matrix, x, y, current_sum, path):
     if (x > 0):
         sum_going_up = min_sum_at_path(input_matrix, x - 1, y, current_sum,
                                        path)
-    if sum_going_down < sum_going_right and sum_going_down < sum_going_up:
-        return sum_going_down
-    elif sum_going_right < sum_going_down and sum_going_right < sum_going_up:
-        return sum_going_right
-    else:
-        return sum_going_up
+
+    return min(sum_going_right, sum_going_down, sum_going_up)
 
 
 def three_way_minimal_path_sum(input_matrix, x, y):
