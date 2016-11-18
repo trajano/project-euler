@@ -157,6 +157,6 @@ def four_way_minimal_path_sum(input_matrix, x, y):
     return min_sum_at_path(input_matrix, 0, 0, 0, [])
 
 
-input_matrix = to_2d(xinput, xinput_width)
+input_matrix = to_2d(input, input_width)
 
 print(four_way_minimal_path_sum(input_matrix, 0, 0))
