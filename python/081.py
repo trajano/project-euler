@@ -114,40 +114,32 @@ def to_2d(input, width):
     return to_2d_internal(input_tuple, width)
 
 
-current_min = 681220
-current_min = 281220
+minpath_matrix = None
 
 
-def min_sum_at_path(input_matrix, x, y, current_sum, path):
-    global current_min
-    width = len(input_matrix[0])
-    current_sum += input_matrix[x][y]
-    path = path + [(x, y)]
-    if current_sum > current_min:
-        return current_min
-    if x == (width - 1) and y == (width - 1):
-        if current_sum < current_min:
-            print(str(path) + " = " + str(current_sum))
-            current_min = current_sum
-        return current_min
-
-    sum_going_right = current_min
-    sum_going_down = current_min
-
-    if y < width - 1:
-        sum_going_right = min_sum_at_path(input_matrix, x, y + 1, current_sum,
-                                          path)
-    if x < width - 1:
-        sum_going_down = min_sum_at_path(input_matrix, x + 1, y, current_sum,
-                                         path)
-    return min(sum_going_right, sum_going_down)
+def build_minpath_matrix(input_matrix):
+    global minpath_matrix
+    minpath_matrix = [[-1 for x in range(len(input_matrix))]
+                      for y in range(len(input_matrix))]
+    for w in range(len(input_matrix) - 1, -1, -1):
+        for j in range(w, -1, -1):
+            calculate_minpath(input_matrix, minpath_matrix, j, w)
+            calculate_minpath(input_matrix, minpath_matrix, w, j)
 
 
-def two_way_minimal_path_sum(input_matrix, x, y):
-    width = len(input_matrix[0])
-    return min_sum_at_path(input_matrix, 0, 0, 0, [])
+def calculate_minpath(input_matrix, minpath_matrix, i, j):
+    w = len(input_matrix)
+    if (i == w - 1 and j == w - 1):
+        minpath_matrix[i][j] = input_matrix[i][j]
+    elif i == w - 1:
+        minpath_matrix[i][j] = input_matrix[i][j] + minpath_matrix[i][j + 1]
+    elif j == w - 1:
+        minpath_matrix[i][j] = input_matrix[i][j] + minpath_matrix[i + 1][j]
+    else:
+        minpath_matrix[i][j] = input_matrix[i][j] + min(
+            minpath_matrix[i + 1][j], minpath_matrix[i][j + 1])
 
 
 input_matrix = to_2d(input, input_width)
-
-print(two_way_minimal_path_sum(input_matrix, 0, 0))
+build_minpath_matrix(input_matrix)
+print(minpath_matrix[0][0])
